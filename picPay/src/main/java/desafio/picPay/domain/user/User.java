@@ -1,8 +1,12 @@
 package desafio.picPay.domain.user;
 
 import desafio.picPay.domain.enums.Type;
+import desafio.picPay.domain.trasnfer.Transfer;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Table(name = "users")
 @Entity(name = "users")
@@ -25,6 +29,9 @@ public class User {
     private Float balance;
     @Column(nullable = false)
     private Type type;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Transfer> transfers = new HashSet<>();
 
     public User(UserDTO userDTO) {
         this.document = userDTO.document();

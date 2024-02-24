@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
+    public ResponseEntity<List<User>> getAll() {
         List<User> users = this.service.getAll();
         return ResponseEntity.ok().body(users);
     }
@@ -40,5 +40,11 @@ public class UserController {
     public ResponseEntity<User> findById(@PathVariable("id") Long id) {
         User user = service.findById(id);
         return ResponseEntity.ok().body(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<User> delete(@PathVariable("id") Long id) {
+        this.service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

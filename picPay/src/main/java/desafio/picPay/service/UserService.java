@@ -36,8 +36,14 @@ public class UserService {
     }
 
     public User findById(long id) {
-        Optional<User> obj = repository.findById(id);
-        return obj.get();
+        Optional<User> user = repository.findById(id);
+        return user.get();
+    }
+
+    public void delete(Long id) {
+        User user = this.repository.findById(id)
+                .orElseThrow(UserNotFoundException::new);
+        this.repository.delete(user);
     }
 
 
